@@ -5,16 +5,21 @@ import SideMenu from "../components/sideMenu";
 import Carosel from "../components/carosel";
 import MovieComponent from "../components/movieComponent";
 import Footer from "../components/footer.js";
-import axios from "axios";
 import { useStateValue } from "../state/stateProvider";
 
-const url = `https://api.themoviedb.org/4/list/${1}?page=${1}&api_key=${
+const urlInitalList = `https://api.themoviedb.org/4/list/${1}?page=${1}&api_key=${
+  process.env.NEXT_PUBLIC_MDB_API_KEY
+}`;
+const weekTrendingUrl = `https://api.themoviedb.org/3/trending/movie/week?api_key=${
   process.env.NEXT_PUBLIC_MDB_API_KEY
 }`;
 
-export async function getStaticProps(context) {
-  const res = await fetch(url);
-  const data = await res.json();
+export async function getStaticProps() {
+  const movieList = await fetch(urlInitalList);
+  const data = await movieList.json();
+  const initialMovieList = data.results
+  const weekTrendingFetch  = await fetch(weekTrendingUrl);
+  const weekTrendingList = await weekTrendingFetch.json();
 
   if (!data) {
     return {
@@ -23,18 +28,22 @@ export async function getStaticProps(context) {
   }
 
   return {
-    props: { data }, // will be passed to the page component as props
+    props: { initialMovieList, weekTrendingList }, // will be passed to the page component as props
   };
 }
 
-export default function Home({ data }) {
-  const [{ initalMovies }, dispatch] = useStateValue();
-
+export default function Home({ initialMovieList, weekTrendingList }) {
+  const [{ initalMovies, dayilTrending }, dispatch] = useStateValue();
+  console.log(dayilTrending)
   useEffect(() => { 
     dispatch({ 
       type: "GET_INITAL_LIST",
-      payload: data.results
+      payload: initialMovieList
 
+    })
+    dispatch({ 
+      type: "GET_TRENDING_DAYILY",
+      payload: weekTrendingList
     })
   },[])
 
@@ -76,7 +85,7 @@ export default function Home({ data }) {
               <Carosel />
 
               <div className="row">
-                <MovieComponent movies={data}/>
+                <MovieComponent movies={initialMovieList}/>
               </div>
             </div>
           </div>
