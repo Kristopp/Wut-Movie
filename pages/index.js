@@ -17,9 +17,10 @@ const weekTrendingUrl = `https://api.themoviedb.org/3/trending/movie/week?api_ke
 export async function getStaticProps() {
   const movieList = await fetch(urlInitalList);
   const data = await movieList.json();
-  const initialMovieList = data.results
+  const initialMovieList = data.results;
   const weekTrendingFetch  = await fetch(weekTrendingUrl);
   const weekTrendingList = await weekTrendingFetch.json();
+  const weekTrendingMovies = weekTrendingList.results;
 
   if (!data) {
     return {
@@ -28,13 +29,13 @@ export async function getStaticProps() {
   }
 
   return {
-    props: { initialMovieList, weekTrendingList }, // will be passed to the page component as props
+    props: { initialMovieList, weekTrendingMovies }, // will be passed to the page component as props
   };
 }
 
-export default function Home({ initialMovieList, weekTrendingList }) {
+export default function Home({ initialMovieList, weekTrendingMovies }) {
   const [{ initalMovies, dayilTrending }, dispatch] = useStateValue();
-  console.log(dayilTrending)
+  console.log()
   useEffect(() => { 
     dispatch({ 
       type: "GET_INITAL_LIST",
@@ -42,8 +43,8 @@ export default function Home({ initialMovieList, weekTrendingList }) {
 
     })
     dispatch({ 
-      type: "GET_TRENDING_DAYILY",
-      payload: weekTrendingList
+      type: "GET_TRENDING_WEEKLY",
+      payload: weekTrendingMovies
     })
   },[])
 

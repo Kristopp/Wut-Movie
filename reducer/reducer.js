@@ -1,6 +1,6 @@
 export const initalState = {
     initalMovies: [],
-    dayilTrending: [],
+    weekelyTrending: [],
     user: null,
     dbAccsessToken: null,
   };
@@ -10,10 +10,11 @@ export const initalState = {
   
   const reducer = (state, action) => {
     switch (action.type) {
-      case "GET_TRENDING_DAYILY":
+      case "GET_TRENDING_WEEKLY":
+       let reduceArray = action.payload.slice(0, 7)
       return { 
         ...state,
-        dayilTrending: action.payload
+        weekelyTrending: reduceArray
       }
       case "GET_INITAL_LIST":
       return { 
