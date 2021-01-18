@@ -21,6 +21,11 @@ export async function getStaticProps() {
   const weekTrendingFetch  = await fetch(weekTrendingUrl);
   const weekTrendingList = await weekTrendingFetch.json();
   const weekTrendingMovies = weekTrendingList.results;
+  if(!weekTrendingFetch){ 
+    return { 
+      weeklyNotfound: true
+    }
+  }
 
   if (!data) {
     return {

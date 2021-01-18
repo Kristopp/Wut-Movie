@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 
 import { useStateValue } from "../state/stateProvider";
 
-const movieComponent = ({ movies }) => {
+const movieComponent = () => {
   const [{ initalMovies }, dispatch] = useStateValue();
   const shortentext = (text, maxLenght) => {
     if (text && text.length > maxLenght) {

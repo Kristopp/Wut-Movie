@@ -1,59 +1,29 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
+import Carousel from "react-bootstrap/Carousel";
 import { useStateValue } from "../state/stateProvider";
 
 function carosel() {
   const [{ weekelyTrending }, dispatch] = useStateValue();
-  console.log(weekelyTrending[0]);
+  let reducerWeekly;
+  console.log(weekelyTrending);
+  const [index, setIndex] = useState(0);
+
+  const handleSelect = (selectedIndex, e) => {
+    setIndex(selectedIndex);
+  };
 
   return (
-    <React.Fragment>
-      <div
-        id="carouselExampleIndicators"
-        className="carousel slide my-4"
-        data-ride="carousel"
-      >
-        <ol className="carousel-indicators">
-          <li
-            data-target="#carouselExampleIndicators"
-            data-slide-to="0"
-            className="active"
-          ></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="5"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="6"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="7"></li>
-        </ol>
-
-   
-          <a
-            className="carousel-control-prev"
-            href="#carouselExampleIndicators"
-            role="button"
-            data-slide="prev"
-          >
-            <span
-              className="carousel-control-prev-icon"
-              aria-hidden="true"
-            ></span>
-            <span className="sr-only">Previous</span>
-          </a>
-          <a
-            className="carousel-control-next"
-            href="#carouselExampleIndicators"
-            role="button"
-            data-slide="next"
-          >
-            <span
-              className="carousel-control-next-icon"
-              aria-hidden="true"
-            ></span>
-            <span className="sr-only">Next</span>
-          </a>
-        </div>
-    </React.Fragment>
+    <Carousel  className="d-block w-50" activeIndex={index} onSelect={handleSelect}>
+      {weekelyTrending.map((movies, index) => (
+        <Carousel.Item key={movies.id} interval={10000}>
+          <img
+            className="d-block w-100"
+            src={`https://image.tmdb.org/t/p/w500/${movies.poster_path}`}
+            alt="First slide"
+          />
+        </Carousel.Item>
+      ))}
+    </Carousel>
   );
 }
 
