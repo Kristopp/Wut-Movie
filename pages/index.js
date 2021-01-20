@@ -4,27 +4,36 @@ import Navbar from "../components/navbar";
 import SideMenu from "../components/sideMenu";
 import Carosel from "../components/carosel";
 import MovieComponent from "../components/movieComponent";
+import CaroselTv from "../components/caroseltv";
 import Footer from "../components/footer.js";
 import { useStateValue } from "../state/stateProvider";
 
 const urlInitalList = `https://api.themoviedb.org/4/list/${1}?page=${1}&api_key=${
   process.env.NEXT_PUBLIC_MDB_API_KEY
 }`;
-const weekTrendingUrl = `https://api.themoviedb.org/3/trending/movie/week?api_key=${
-  process.env.NEXT_PUBLIC_MDB_API_KEY
-}`;
+const weekTrendingUrl = `https://api.themoviedb.org/3/trending/movie/week?api_key=${process.env.NEXT_PUBLIC_MDB_API_KEY}`;
+const weekTrendingTvUrl = `https://api.themoviedb.org/3/trending/tv/week?api_key=${process.env.NEXT_PUBLIC_MDB_API_KEY}`;
 
 export async function getStaticProps() {
   const movieList = await fetch(urlInitalList);
   const data = await movieList.json();
   const initialMovieList = data.results;
-  const weekTrendingFetch  = await fetch(weekTrendingUrl);
+  const weekTrendingFetch = await fetch(weekTrendingUrl);
   const weekTrendingList = await weekTrendingFetch.json();
   const weekTrendingMovies = weekTrendingList.results;
-  if(!weekTrendingFetch){ 
-    return { 
-      weeklyNotfound: true
-    }
+  const weekTrendingTvFetch = await fetch(weekTrendingTvUrl);
+  const weekTrendingTvList = await weekTrendingTvFetch.json();
+  const weekTrendingTv = weekTrendingTvList.results;
+
+  if (!weekTrendingFetch) {
+    return {
+      weeklyNotfound: true,
+    };
+  }
+  if (!weekTrendingTvFetch) {
+    return {
+      weeklyNotfound: true,
+    };
   }
 
   if (!data) {
@@ -34,29 +43,36 @@ export async function getStaticProps() {
   }
 
   return {
-    props: { initialMovieList, weekTrendingMovies }, // will be passed to the page component as props
+    props: { initialMovieList, weekTrendingMovies, weekTrendingTv }, // will be passed to the page component as props
   };
 }
 
-export default function Home({ initialMovieList, weekTrendingMovies }) {
+export default function Home({
+  initialMovieList,
+  weekTrendingMovies,
+  weekTrendingTv,
+}) {
   const [{ initalMovies, dayilTrending }, dispatch] = useStateValue();
-  console.log()
-  useEffect(() => { 
-    dispatch({ 
+  console.log();
+  useEffect(() => {
+    dispatch({
       type: "GET_INITAL_LIST",
-      payload: initialMovieList
-
-    })
-    dispatch({ 
+      payload: initialMovieList,
+    });
+    dispatch({
       type: "GET_TRENDING_WEEKLY",
-      payload: weekTrendingMovies
-    })
-  },[])
+      payload: weekTrendingMovies,
+    });
+
+    dispatch({
+      type: "GET_TRENDING_WEEKLY_TV",
+      payload: weekTrendingTv,
+    });
+  }, []);
 
   return (
     <div>
       <Head>
-        <title>Home</title>
         <link
           rel="stylesheet"
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -84,14 +100,17 @@ export default function Home({ initialMovieList, weekTrendingMovies }) {
         <div className="container">
           <div className="row">
             <div className="col-lg-3">
-              <SideMenu appName={"Wut Movie?"} />
+              <SideMenu />
             </div>
 
             <div className="col-lg-9">
-              <Carosel />
+              <div className="row">
+                <Carosel />
+                <CaroselTv />
+              </div>
 
               <div className="row">
-                <MovieComponent movies={initialMovieList}/>
+                <MovieComponent movies={initialMovieList} />
               </div>
             </div>
           </div>
