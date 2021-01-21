@@ -97,21 +97,21 @@ export default function Home({
       </Head>
       <Navbar />
       <div className="home-page">
-        <div className="container">
+        <div className="container-fluid">
           <div className="row">
             <div className="col-lg-3">
               <SideMenu />
             </div>
 
-            <div className="col-lg-9">
-              <div className="row">
-                <Carosel />
-                <CaroselTv />
-              </div>
+            <div className="col-lg-3">
+              <Carosel />
+            </div>
+            <div className="col-lg-3">
+              <CaroselTv />
+            </div>
 
-              <div className="row">
-                <MovieComponent movies={initialMovieList} />
-              </div>
+            <div className=" row">
+              <MovieComponent movies={initialMovieList} />
             </div>
           </div>
         </div>

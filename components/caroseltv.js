@@ -14,7 +14,7 @@ function carosel() {
     <div>
       <h2>weekly trending tv</h2>
       <Carousel
-        className="d-block w-50"
+        className="d-block w-100"
         activeIndex={index}
         onSelect={handleSelect}
       >
