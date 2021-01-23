@@ -9,14 +9,13 @@ function navbar() {
           <a className="navbar-brand" href="#">
             Wut Movie?
           </a>
-          <div className="input-group border-0">
-            <span className="input-group-append border-0 border-left-0">
-              <span className="input-group-text bg-transparent rounded-left border-right-0">
-                <Search className="search-icon"/>
+          <div className="input-group">
+            <span className="input-group-append search-input">
+              <span className="input-group-text bg-transparent search-input">
+                <Search color="rgb(250, 216, 50, 0.8)"  />
               </span>
             </span>
-
-            <input className="form-control border-left-0 outline-none" />
+            <input className="form-control" type="text" value="looking for movie or series?" />
           </div>
 
           <div className="collapse navbar-collapse" id="navbarResponsive">
@@ -52,22 +51,30 @@ function navbar() {
         </div>
       </nav>
       <style jsx>{`
-      .container { 
-        border-radius: 5px;
-        background-color: #303030;
-      }
-      a { 
-        opacity: 85%;
-        color: #fad832;
-      }
-      .search-icon { 
-        color: rgb(250, 216, 50, 0.8);
-      }
-      .form-control { 
-        background-color: rgb(250, 216, 50, 0.2);
-      }
-  
-  
+        .container {
+          border: 0.2px solid rgb(250, 216, 50, 0.5);
+          background-color: #303030;
+        }
+        a {
+          opacity: 85%;
+          color: #fad832;
+        }
+        .search-input {
+          border: #303030;
+          color: rgb(250, 216, 50, 0.8);
+        }
+        .form-control {
+          color: #121211;
+          border-radius: 0px;
+          border: #303030;
+          background-color: rgb(250, 216, 50, 0.4);
+        }
+        .form-control:focus {
+          border-color: #ffdc33;
+          outline: 0;
+          -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgb(250, 216, 50, 0.4);
+                  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgb(250, 216, 50, 0.4);
+        }
       `}</style>
     </div>
   );

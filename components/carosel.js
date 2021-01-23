@@ -11,7 +11,7 @@ function carosel() {
   };
 
   return (
-    <div>
+    <div className="carousel">
       <h2>weekly trending movies</h2>
       <Carousel
         className="d-block w-100"
@@ -22,7 +22,7 @@ function carosel() {
           <Carousel.Item key={movies.id} interval={10000}>
             <div className="carousel-inner"></div>
             <img
-              className="d-block w-100"
+              className="d-block w-100 inner-image"
               src={`https://image.tmdb.org/t/p/w500/${movies.poster_path}`}
               alt="First slide"
             />
@@ -31,9 +31,18 @@ function carosel() {
       </Carousel>
       <style jsx>
         {`
-        h2 { 
-          color: rgb(250, 216, 50, 0.8);
-        }
+          h2 {
+            text-align: center;
+            font-size: 1.7em;
+            white-space: nowrap;
+            overflow: hidden;
+            line-height: 1.4;
+            color: rgb(250, 216, 50, 0.8);
+          }
+          .carousel {
+            margin: 5px;
+            border: 0.5px solid rgb(250, 216, 50, 0.9);
+          }
         `}
       </style>
     </div>

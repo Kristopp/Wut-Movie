@@ -110,7 +110,7 @@ export default function Home({
               <CaroselTv />
             </div>
 
-            <div className=" row">
+            <div className="row">
               <MovieComponent movies={initialMovieList} />
             </div>
           </div>

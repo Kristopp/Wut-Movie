@@ -29,6 +29,22 @@ const movieComponent = () => {
           </div>
         </div>
       ))}
+           <style jsx>
+        {`
+        .card { 
+          border: 0.5px solid rgb(250, 216, 50, 0.9);
+          background-color: #303030;
+          text-opacity: 85%;
+          color: rgb(250, 216, 50, 0.9);
+        }
+        .card-body { 
+          background-color: rgb(26, 25, 25, 0.8);
+        }
+        .card-footer { 
+          background-color: rgb(26, 25, 25, 0.8);
+        }
+        `}
+      </style>
     </React.Fragment>
   );
 };
