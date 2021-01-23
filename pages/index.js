@@ -99,7 +99,7 @@ export default function Home({
       <div className="home-page">
         <div className="container-fluid">
           <div className="row">
-            <div className="col-lg-3">
+            <div className="side-menu-container col-lg-3">
               <SideMenu />
             </div>
 
@@ -120,8 +120,10 @@ export default function Home({
       <style jsx>
         {`
           .home-page {
+            background-color: #121212;
             padding-top: 80px;
           }
+          .
         `}
       </style>
     </div>

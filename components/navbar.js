@@ -3,16 +3,16 @@ import { Search } from "react-bootstrap-icons";
 
 function navbar() {
   return (
-    <div className="container">
+    <div className="container-fluid">
       <nav className="navbar navbar-expand-lg fixed-top">
         <div className="container">
           <a className="navbar-brand" href="#">
             Wut Movie?
           </a>
-          <div className="input-group">
-            <span className="input-group-append bg-white  border-left-0">
+          <div className="input-group border-0">
+            <span className="input-group-append border-0 border-left-0">
               <span className="input-group-text bg-transparent rounded-left border-right-0">
-            <Search />
+                <Search className="search-icon"/>
               </span>
             </span>
 
@@ -52,7 +52,20 @@ function navbar() {
         </div>
       </nav>
       <style jsx>{`
-      .
+      .container { 
+        border-radius: 5px;
+        background-color: #303030;
+      }
+      a { 
+        opacity: 85%;
+        color: #fad832;
+      }
+      .search-icon { 
+        color: rgb(250, 216, 50, 0.8);
+      }
+      .form-control { 
+        background-color: rgb(250, 216, 50, 0.2);
+      }
   
   
       `}</style>

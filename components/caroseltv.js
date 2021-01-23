@@ -29,6 +29,13 @@ function carosel() {
           </Carousel.Item>
         ))}
       </Carousel>
+      <style jsx>
+        {`
+        h2 { 
+          color: rgb(250, 216, 50, 0.8);
+        }
+        `}
+      </style>
     </div>
   );
 }
