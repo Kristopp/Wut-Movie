@@ -1,9 +1,10 @@
 export const initalState = {
-    initalMovies: [],
+    initalPopularMovies: [],
     weekelyTrending: [],
     weekelyTrendingTvShows: [],
     user: null,
     dbAccsessToken: null,
+    pageCounter: 1,
   };
   
   //Selector
@@ -19,15 +20,15 @@ export const initalState = {
       }
       case "GET_TRENDING_WEEKLY_TV":
        let reduceArrayTv = action.payload.slice(0, 7)
-       console.log(reduceArrayTv)
       return { 
         ...state,
         weekelyTrendingTvShows: reduceArrayTv
       }
       case "GET_INITAL_LIST":
+        console.log(action.payload)
       return { 
         ...state,
-        initalMovies: action.payload
+        initalPopularMovies: action.payload
       }
         default:
           return state;

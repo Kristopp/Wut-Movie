@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from "react";
 import Carousel from "react-bootstrap/Carousel";
-import { useStateValue } from "../state/stateProvider";
+import { useStateValue } from "../../state/stateProvider";
 
 function carosel() {
   const [{ weekelyTrending }, dispatch] = useStateValue();
@@ -20,17 +20,24 @@ function carosel() {
       >
         {weekelyTrending.map((movies, index) => (
           <Carousel.Item key={movies.id} interval={10000}>
-            <div className="carousel-inner"></div>
-            <img
-              className="d-block w-100 inner-image"
-              src={`https://image.tmdb.org/t/p/w500/${movies.poster_path}`}
-              alt="First slide"
-            />
+            <div className="img carousel-inner">
+              <img
+                className="d-block w-100 inner-image"
+                src={`https://image.tmdb.org/t/p/w500/${movies.poster_path}`}
+                alt="First slide"
+              />
+            </div>
           </Carousel.Item>
         ))}
       </Carousel>
       <style jsx>
         {`
+            .carousel {
+              border-radius: 5px;
+              background-color: rgb(26, 25, 25, 0.8);
+              margin: 10px;
+              border: 0.5px solid rgb(250, 216, 50, 0.9);
+            }
           h2 {
             text-align: center;
             font-size: 1.7em;
@@ -39,9 +46,8 @@ function carosel() {
             line-height: 1.4;
             color: rgb(250, 216, 50, 0.8);
           }
-          .carousel {
-            margin: 5px;
-            border: 0.5px solid rgb(250, 216, 50, 0.9);
+          .img { 
+            border-radius: 5px;
           }
         `}
       </style>

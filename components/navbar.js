@@ -15,7 +15,7 @@ function navbar() {
                 <Search color="rgb(250, 216, 50, 0.8)"  />
               </span>
             </span>
-            <input className="form-control" type="text" value="looking for movie or series?" />
+            <input className="form-control" type="text" defaultValue="looking for movie or series?" />
           </div>
 
           <div className="collapse navbar-collapse" id="navbarResponsive">

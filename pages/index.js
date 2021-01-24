@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import Navbar from "../components/navbar";
 import SideMenu from "../components/sideMenu";
-import Carosel from "../components/carosel";
+import PopularMovies from "./popularMovies";
+import Carosel from "../components/carosel/caroseltv";
 import MovieComponent from "../components/movieComponent";
-import CaroselTv from "../components/caroseltv";
+import CaroselTv from "../components/carosel/carosel";
 import Footer from "../components/footer.js";
 import { useStateValue } from "../state/stateProvider";
 
@@ -47,18 +48,9 @@ export async function getStaticProps() {
   };
 }
 
-export default function Home({
-  initialMovieList,
-  weekTrendingMovies,
-  weekTrendingTv,
-}) {
-  const [{ initalMovies, dayilTrending }, dispatch] = useStateValue();
-  console.log();
+export default function Home({ weekTrendingMovies, weekTrendingTv }) {
+  const [{}, dispatch] = useStateValue();
   useEffect(() => {
-    dispatch({
-      type: "GET_INITAL_LIST",
-      payload: initialMovieList,
-    });
     dispatch({
       type: "GET_TRENDING_WEEKLY",
       payload: weekTrendingMovies,
@@ -109,9 +101,9 @@ export default function Home({
             <div className="col-lg-3">
               <CaroselTv />
             </div>
-
+            <PopularMovies />
             <div className="row">
-              <MovieComponent movies={initialMovieList} />
+              <MovieComponent />
             </div>
           </div>
         </div>

@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { useStateValue } from "../state/stateProvider";
 
 const movieComponent = () => {
-  const [{ initalMovies }, dispatch] = useStateValue();
+  const [{ initalPopularMovies }, dispatch] = useStateValue();
   const shortentext = (text, maxLenght) => {
     if (text && text.length > maxLenght) {
       return text.substr(0, maxLenght) + "...";
@@ -12,7 +12,7 @@ const movieComponent = () => {
   };
   return (
     <React.Fragment>
-      {initalMovies.map((movies) => (
+      {[1].map((movies) => (
         <div key={movies.id} className="col-lg-3 col-md-3 mb-3">
           <div className="card h-100">
             <a href="#">
@@ -32,12 +32,14 @@ const movieComponent = () => {
            <style jsx>
         {`
         .card { 
+          
           border: 0.5px solid rgb(250, 216, 50, 0.9);
           background-color: #303030;
           text-opacity: 85%;
           color: rgb(250, 216, 50, 0.9);
         }
         .card-body { 
+          text-align: center;
           background-color: rgb(26, 25, 25, 0.8);
         }
         .card-footer { 
